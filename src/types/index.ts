@@ -10,6 +10,12 @@ export type Geo = {
   country: string;
 };
 
+export type weatherType = {
+  description: string;
+  icon: string;
+  main: string;
+};
+
 export type WeatherDTO = {
   dt: number; // time of calculation
   main: {
@@ -18,14 +24,7 @@ export type WeatherDTO = {
     temp_max: number;
     temp_min: number;
   };
-  clouds: { all: number };
+  weather: weatherType[];
 };
 
-export type SearchItem = {
-  id: number;
-  city: string;
-  country: string;
-  time: number;
-  lat: number;
-  lon: number;
-};
+export type SearchItem = Geo & { id: number; time: number };

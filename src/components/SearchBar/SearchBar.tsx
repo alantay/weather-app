@@ -34,19 +34,22 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   return (
     <SearchBarStyled>
       <form onSubmit={handleSubmit}>
-        <TextInputStyled
-          value={searchInput}
-          onChange={handleSearchInputChange}
-        />
-        <button type="submit">search</button>
-      </form>
+        <div>
+          <TextInputStyled
+            value={searchInput}
+            onChange={handleSearchInputChange}
+            className={showSuggestion ? "showSuggestion" : ""}
+          />
+          {showSuggestion && (
+            <Suggestions
+              data={geoData}
+              setSelection={setSelectedCityAndShowSuggestion}
+            />
+          )}
+        </div>
 
-      {showSuggestion && (
-        <Suggestions
-          data={geoData}
-          setSelection={setSelectedCityAndShowSuggestion}
-        />
-      )}
+        <button type="submit"></button>
+      </form>
     </SearchBarStyled>
   );
 };

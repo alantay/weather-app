@@ -14,7 +14,6 @@ export const getDateTimeFromUnix = (unixTimestamp: number) => {
   const day = date.getDate();
   let hours = date.getHours();
   const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
 
   const ampm = hours >= 12 ? "pm" : "am";
 
@@ -26,7 +25,7 @@ export const getDateTimeFromUnix = (unixTimestamp: number) => {
     .toString()
     .padStart(2, "0")}-${year} ${hours.toString().padStart(2, "0")}:${minutes
     .toString()
-    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}${ampm}`;
+    .padStart(2, "0")}${ampm}`;
 
   return utcDateString;
 };

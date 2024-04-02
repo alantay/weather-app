@@ -1,3 +1,4 @@
+import Styled from "./Suggestion.styled";
 import { Geo } from "../../../types";
 
 const Suggestions = ({
@@ -7,9 +8,9 @@ const Suggestions = ({
   data: Geo[];
   setSelection: (g: Geo) => void;
 }) => {
-  if (!data?.length) return null;
+  if (!data?.length) return <div>No result</div>;
   return (
-    <ul>
+    <Styled>
       {data.map((d) => {
         const { name, country } = d;
         const nameCountry = `${name}, ${country}`;
@@ -19,7 +20,7 @@ const Suggestions = ({
           </li>
         );
       })}
-    </ul>
+    </Styled>
   );
 };
 

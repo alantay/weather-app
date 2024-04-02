@@ -14,26 +14,33 @@ const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
   console.log({ data });
   const {
     main: { temp, humidity, temp_max, temp_min },
-    clouds: { all: cloudsPercent },
+    weather,
     dt,
   } = data;
+
+  const weatherPrint = weather.map(({ main }) => main).join(", ");
   return (
     <Styled>
       <div role="heading">Today's Weather</div>
 
-      <div>
-        <span className="temperature" role="temperature">
-          {formatTemperature(temp)}
-        </span>
-        <span className="temp-max-min">
-          H:{formatTemperature(temp_max)} L:{formatTemperature(temp_min)}
-        </span>
-        <span className="city-country">
-          {name}, {country}
-        </span>
-        <span>{getDateTimeFromUnix(dt)}</span>
-        <span className="humidity">{humidity}%</span>
-        <span className="clouds">{cloudsPercent}%</span>
+      <div className="weather-details">
+        <div className="temperature-wrapper">
+          <span className="temperature" role="temperature">
+            {formatTemperature(temp)}
+          </span>
+          <span className="temp-max-min">
+            H:{formatTemperature(temp_max)} L:{formatTemperature(temp_min)}
+          </span>
+          <span className="city-country">
+            {name}, {country}
+          </span>
+        </div>
+
+        <div className="other-details-wrapper">
+          <span>{getDateTimeFromUnix(dt)}</span>
+          <span className="humidity">Humidity {humidity}%</span>
+          <span className="weather">{weatherPrint}</span>
+        </div>
       </div>
     </Styled>
   );

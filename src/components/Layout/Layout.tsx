@@ -21,12 +21,7 @@ const Layout = () => {
   useEffect(() => {
     if (history.length > 0) {
       const latestSearchedCity = history[history.length - 1];
-      setSelectedCity({
-        name: latestSearchedCity.city,
-        country: latestSearchedCity.country,
-        lat: latestSearchedCity.lat,
-        lon: latestSearchedCity.lon,
-      });
+      setSelectedCity(latestSearchedCity);
     }
   }, [history]);
 
@@ -37,11 +32,8 @@ const Layout = () => {
       const now = Date.now();
       const si: SearchItem = {
         id: now,
-        city: city.name,
-        country: city.country,
         time: now,
-        lat: city.lat,
-        lon: city.lon,
+        ...city,
       };
       pushSearchIntoHistory(si);
     }
@@ -50,12 +42,14 @@ const Layout = () => {
   return (
     <Styled>
       <SearchBar setSelectedCity={setSelectedCityAndPushToLocalStorage} />
-      {selectedCity && <TodayWeather selectedCity={selectedCity} />}
-      <SearchHistory
-        history={history}
-        deleteItem={deleteItem}
-        setSelectedCity={setSelectedCity}
-      />
+      <div className="main-panel">
+        {selectedCity && <TodayWeather selectedCity={selectedCity} />}
+        <SearchHistory
+          history={history}
+          deleteItem={deleteItem}
+          setSelectedCity={setSelectedCity}
+        />
+      </div>
     </Styled>
   );
 };
