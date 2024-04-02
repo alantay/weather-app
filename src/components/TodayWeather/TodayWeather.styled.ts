@@ -6,4 +6,7 @@ export default styled.div`
     font-size: 3rem;
     font-weight: 600;
   }
+  span {
+    border: 1px solid blue;
+  }
 `;

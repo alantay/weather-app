@@ -20,3 +20,12 @@ export type WeatherDTO = {
   };
   clouds: { all: number };
 };
+
+export type SearchItem = {
+  id: number;
+  city: string;
+  country: string;
+  time: number;
+  lat: number;
+  lon: number;
+};

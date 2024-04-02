@@ -1,7 +1,7 @@
 import { Geo } from "../../types";
 import Styled from "./TodayWeather.styled";
 import { useGetWeatherByCoor } from "../../services/queries";
-import { formatTemperature } from "../../utils";
+import { formatTemperature, getDateTimeFromUnix } from "../../utils";
 
 const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
   console.log({ selectedCity });
@@ -15,20 +15,23 @@ const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
   const {
     main: { temp, humidity, temp_max, temp_min },
     clouds: { all: cloudsPercent },
+    dt,
   } = data;
   return (
     <Styled>
       <div role="heading">Today's Weather</div>
-      <div className="temperature" role="temperature">
-        {formatTemperature(temp)}
-      </div>
-      <div className="temp-max-min">
-        H:{formatTemperature(temp_max)} L:{formatTemperature(temp_min)}
-      </div>
+
       <div>
+        <span className="temperature" role="temperature">
+          {formatTemperature(temp)}
+        </span>
+        <span className="temp-max-min">
+          H:{formatTemperature(temp_max)} L:{formatTemperature(temp_min)}
+        </span>
         <span className="city-country">
           {name}, {country}
         </span>
+        <span>{getDateTimeFromUnix(dt)}</span>
         <span className="humidity">{humidity}%</span>
         <span className="clouds">{cloudsPercent}%</span>
       </div>

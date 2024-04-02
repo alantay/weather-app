@@ -1,17 +1,17 @@
 import { useState, ChangeEvent } from "react";
+import SearchBarStyled from "./SearchBar.styled";
 import { useGetGeoLocationByName } from "../../services/queries";
 import Suggestions from "./components/Suggestion";
 import TextInputStyled from "../ui/TextInput.styled";
 import { Geo } from "../../types";
 
-const SearchBar = ({
-  setSelectedCity,
-  selectedCity,
-}: {
-  setSelectedCity: (g: Geo | null) => void;
-  selectedCity: Geo | null;
-}) => {
+interface SearchBarProps {
+  setSelectedCity: (city: Geo | null) => void;
+}
+
+const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   const [searchInput, setSearchInput] = useState("");
+  const [showSuggestion, setShowSuggestion] = useState(false);
 
   const { data: geoData, refetch: reFetchGeo } =
     useGetGeoLocationByName(searchInput);
@@ -20,19 +20,34 @@ const SearchBar = ({
     setSearchInput(e.target.value);
   };
 
-  const handleSearch = () => {
-    setSelectedCity(null);
-    reFetchGeo();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await reFetchGeo();
+    setShowSuggestion(true);
+  };
+
+  const setSelectedCityAndShowSuggestion = (city: Geo | null) => {
+    setSelectedCity(city);
+    setShowSuggestion(false);
   };
 
   return (
-    <>
-      <TextInputStyled value={searchInput} onChange={handleSearchInputChange} />
-      <button onClick={handleSearch}>search</button>
-      {!selectedCity && (
-        <Suggestions data={geoData} setSelection={setSelectedCity} />
+    <SearchBarStyled>
+      <form onSubmit={handleSubmit}>
+        <TextInputStyled
+          value={searchInput}
+          onChange={handleSearchInputChange}
+        />
+        <button type="submit">search</button>
+      </form>
+
+      {showSuggestion && (
+        <Suggestions
+          data={geoData}
+          setSelection={setSelectedCityAndShowSuggestion}
+        />
       )}
-    </>
+    </SearchBarStyled>
   );
 };
 
