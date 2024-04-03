@@ -1,4 +1,3 @@
-import { Geo } from "../../types";
 import TodayWeatherWrapper, {
   TemperatureWrapper,
   Temperature,
@@ -8,8 +7,13 @@ import TodayWeatherWrapper, {
 import { useGetWeatherByCoor } from "../../services/queries";
 import { formatTemperature, getDateTimeFromUnix } from "../../utils";
 import { openWeatherIconToLocalIconMap } from "./utils";
+import { useSelectedCityStore } from "../../store";
 
-const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
+const TodayWeather = () => {
+  const selectedCity = useSelectedCityStore((state) => state.selectedCity);
+  if (!selectedCity) {
+    return null;
+  }
   const { lon, lat, name, country } = selectedCity;
   const { data, isPending } = useGetWeatherByCoor({ lon, lat });
 

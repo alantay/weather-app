@@ -3,32 +3,26 @@ import SearchBar from "../SearchBar";
 import TodayWeather from "../TodayWeather";
 import SearchHistory from "../SearchHistory";
 import ThemeToggle from "../ThemeToggle";
-import useSelectInputCity from "./hooks/useSelectInputCity";
 import useSearchHistory from "./hooks/useSearchHistory";
+import { useSelectedCityStore } from "../../store";
 
 const Layout = () => {
-  const { selectedCity, setSelectedCity, setSearchInput, searchInput } =
-    useSelectInputCity();
-
   const { setSelectedCityAndPushToLocalStorage, deleteItem, history } =
-    useSearchHistory({ setSelectedCity, selectedCity });
+    useSearchHistory();
+
+  const selectedCity = useSelectedCityStore((state) => state.selectedCity);
 
   return (
     <Styled>
       <ThemeToggle />
-      <SearchBar
-        setSelectedCity={setSelectedCityAndPushToLocalStorage}
-        setSearchInput={setSearchInput}
-        searchInput={searchInput}
-      />
+      <SearchBar setSelectedCity={setSelectedCityAndPushToLocalStorage} />
       {!!history.length && (
         <MainPanel>
-          {selectedCity && <TodayWeather selectedCity={selectedCity} />}
+          {selectedCity && <TodayWeather />}
           <SearchHistory
             history={history}
             deleteItem={deleteItem}
             setSelectedCity={setSelectedCityAndPushToLocalStorage}
-            setSearchInput={setSearchInput}
           />
         </MainPanel>
       )}

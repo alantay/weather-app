@@ -8,6 +8,7 @@ const useSearch = ({ searchInput }: { searchInput: string }) => {
     data: geoData,
     refetch: reFetchGeo,
     isLoading,
+    error,
   } = useGetGeoLocationByName(searchInput);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +23,7 @@ const useSearch = ({ searchInput }: { searchInput: string }) => {
     showSuggestion,
     geoData,
     isLoading,
+    error,
   };
 };
 

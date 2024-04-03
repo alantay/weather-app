@@ -5,19 +5,16 @@ import TextInput from "../ui/TextInput.styled";
 import { Geo } from "../../types";
 import useSearch from "./hooks/useSearch";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+import { useSearchInputStore } from "../../store";
 
 interface SearchBarProps {
   setSelectedCity: (city: Geo | null) => void;
-  setSearchInput: (str: string) => void;
-  searchInput: string;
 }
 
-const SearchBar = ({
-  setSelectedCity,
-  setSearchInput,
-  searchInput,
-}: SearchBarProps) => {
+const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   const ref: any = useRef();
+  const searchInput = useSearchInputStore((state) => state.searchInput);
+  const setSearchInput = useSearchInputStore((state) => state.setSearchInput);
 
   useOnClickOutside(ref, () => setShowSuggestion(false));
 
@@ -27,6 +24,7 @@ const SearchBar = ({
     handleSubmit,
     geoData,
     isLoading,
+    error,
   } = useSearch({ searchInput });
 
   const setSelectedCityAndShowSuggestion = (city: Geo | null) => {
@@ -38,6 +36,7 @@ const SearchBar = ({
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
+  if (error) return <div>{error.message}</div>;
 
   return (
     <SearchBarWrapper ref={ref}>

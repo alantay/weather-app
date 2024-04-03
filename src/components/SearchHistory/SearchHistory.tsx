@@ -4,6 +4,7 @@ import SearchHistoryWrapper, {
   City,
   HistoryListing,
 } from "./SearchHistory.styled";
+import { useSearchInputStore } from "../../store";
 import { getDateTimeFromUnix } from "../../utils";
 import { Geo, SearchItem } from "../../types";
 import SearchIcon from "../../assets/history-item-search.svg?react";
@@ -14,15 +15,15 @@ interface SearchHistoryProps {
   history: SearchItem[];
   deleteItem: (d: number) => void;
   setSelectedCity: (city: Geo) => void;
-  setSearchInput: (city: string) => void;
 }
 
 const SearchHistory = ({
   history,
   deleteItem,
   setSelectedCity,
-  setSearchInput,
 }: SearchHistoryProps) => {
+  const setSearchInput = useSearchInputStore((state) => state.setSearchInput);
+
   const historySearchClickHandler = ({
     country,
     lat,

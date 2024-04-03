@@ -2,19 +2,19 @@ import { useEffect } from "react";
 import { Geo, SearchItem } from "../../../types";
 import useArrayLocalStorage from "../../../hooks/useArrayLocalStorage";
 import { LOCAL_STORAGE_SEARCH_HISTORY } from "../../../constants";
+import { useSelectedCityStore } from "../../../store";
 
-const useSearchHistory = ({
-  setSelectedCity,
-  selectedCity,
-}: {
-  setSelectedCity: (city: Geo | null) => void;
-  selectedCity: Geo | null;
-}) => {
+const useSearchHistory = () => {
   const {
     getItem: getSearchHistory,
     pushItem: pushSearchIntoHistory,
     deleteItem,
   } = useArrayLocalStorage<SearchItem>(LOCAL_STORAGE_SEARCH_HISTORY);
+
+  const selectedCity = useSelectedCityStore((state) => state.selectedCity);
+  const setSelectedCity = useSelectedCityStore(
+    (state) => state.setSelectedCity
+  );
 
   const history: SearchItem[] = getSearchHistory();
 
