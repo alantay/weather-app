@@ -8,8 +8,8 @@ const WeatherDetails = styled.div<WeatherDetailsProps>`
     /* Weather Icon Pseudo element */
     content: "";
     position: absolute;
-    top: calc(var(--weather-icon-width) / 3 * -1);
-    right: 0.5rem;
+    top: var(--weather-icon-top-offset);
+    right: 0.8rem;
     background-image: url(${(props) => props.$weatherIcon});
     background-size: contain;
     background-repeat: no-repeat;
@@ -23,7 +23,7 @@ const WeatherDetails = styled.div<WeatherDetailsProps>`
     position: relative;
 
     @media (min-width: 768px) {
-      grid-template-columns: 12rem 1fr;
+      grid-template-columns: 19rem 1fr;
     }
   }
 `;
@@ -31,7 +31,7 @@ const WeatherDetails = styled.div<WeatherDetailsProps>`
 export const TemperatureWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 `;
 
 export const Temperature = styled.span`
@@ -53,8 +53,8 @@ export const WeatherTypeDetails = styled.div`
   justify-content: flex-start;
   flex-flow: column-reverse;
   color: var(--secondary-font-color);
-  gap: 0.4rem;
-  font-weight: 300;
+  gap: 0.6rem;
+  font-weight: var(--font-weight-thin);
 
   @media (min-width: 768px) {
     flex-direction: row;

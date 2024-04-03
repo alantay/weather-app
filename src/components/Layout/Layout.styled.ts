@@ -15,6 +15,6 @@ export const MainPanel = styled.div`
   padding: var(--main-panel-padding);
   position: relative;
   > * + * {
-    margin-top: 1.25rem;
+    margin-top: 2rem;
   }
 `;

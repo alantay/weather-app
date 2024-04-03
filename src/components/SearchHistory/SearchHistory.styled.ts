@@ -3,11 +3,11 @@ import styled from "styled-components";
 export default styled.div`
   background-color: var(--low-opacity-color);
   border-radius: var(--global-border-radius-2x);
-  padding: 1.5rem 1rem;
+  padding: 2.4rem 1.6rem;
 
   h3 {
-    font-weight: 300;
-    margin-bottom: 1.5rem;
+    font-weight: var(--font-weight-thin);
+    margin-bottom: 2.4rem;
   }
 
   /* .history-wrapper {
@@ -19,12 +19,11 @@ export default styled.div`
 
 export const HistoryListItem = styled.li`
   background-color: var(--low-opacity-color-2);
-  padding: 1rem 0.75rem;
+  padding: 1.6rem 1.2rem;
   border-radius: var(--global-border-radius-1x);
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  font-weight: 300;
+  gap: 1.6rem;
 
   /* .time {
     font-size: var(--secondary-font-size);
@@ -36,12 +35,12 @@ export const HistoryListItem = styled.li`
   .content-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.4rem;
   }
 
   .actions {
     display: flex;
-    gap: 0.625rem;
+    gap: 1rem;
   }
 
   @media (min-width: 768px) {
@@ -66,5 +65,5 @@ export const City = styled.div``;
 export const HistoryListing = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.6rem;
 `;

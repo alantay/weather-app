@@ -7,10 +7,10 @@ export default styled.button`
   background: transparent;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 0.6rem;
+  font-size: 1rem;
   color: var(--primary-font-color);
   opacity: 0.5;
-  transition: opacity 0.3s;
+  transition: opacity var(--transition-duration);
   &:hover {
     opacity: 1;
   }

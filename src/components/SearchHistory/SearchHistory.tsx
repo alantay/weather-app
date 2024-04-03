@@ -9,17 +9,17 @@ import { getDateTimeFromUnix } from "../../utils";
 import { Geo, SearchItem } from "../../types";
 import SearchIcon from "../../assets/history-item-search.svg?react";
 import TrashIcon from "../../assets/trash-icon.svg?react";
-import IconBtn from "../ui/IconBtn";
+import IconBtn from "../ui/IconBtn.styled";
 
 interface SearchHistoryProps {
-  history: SearchItem[];
-  deleteItem: (d: number) => void;
+  searchHistory: SearchItem[];
+  deleteSearchHistoryItem: (d: number) => void;
   setSelectedCity: (city: Geo) => void;
 }
 
 const SearchHistory = ({
-  history,
-  deleteItem,
+  searchHistory,
+  deleteSearchHistoryItem,
   setSelectedCity,
 }: SearchHistoryProps) => {
   const setSearchInput = useSearchInputStore((state) => state.setSearchInput);
@@ -40,7 +40,7 @@ const SearchHistory = ({
   };
 
   const renderHistory = () => {
-    return [...history].reverse().map((historyItem: SearchItem) => {
+    return [...searchHistory].reverse().map((historyItem: SearchItem) => {
       const { id, name, country, time } = historyItem;
       const cityName = `${name}, ${country}`;
       return (
@@ -56,7 +56,7 @@ const SearchHistory = ({
             >
               <SearchIcon />
             </IconBtn>
-            <IconBtn type="button" onClick={() => deleteItem(id)}>
+            <IconBtn type="button" onClick={() => deleteSearchHistoryItem(id)}>
               <TrashIcon />
             </IconBtn>
           </div>

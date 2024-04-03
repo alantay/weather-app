@@ -7,8 +7,11 @@ import useSearchHistory from "./hooks/useSearchHistory";
 import { useSelectedCityStore } from "../../store";
 
 const Layout = () => {
-  const { setSelectedCityAndPushToLocalStorage, deleteItem, history } =
-    useSearchHistory();
+  const {
+    setSelectedCityAndPushToLocalStorage,
+    deleteSearchHistoryItem,
+    searchHistory,
+  } = useSearchHistory();
 
   const selectedCity = useSelectedCityStore((state) => state.selectedCity);
 
@@ -20,8 +23,8 @@ const Layout = () => {
         <MainPanel>
           {selectedCity && <TodayWeather />}
           <SearchHistory
-            history={history}
-            deleteItem={deleteItem}
+            searchHistory={searchHistory}
+            deleteSearchHistoryItem={deleteSearchHistoryItem}
             setSelectedCity={setSelectedCityAndPushToLocalStorage}
           />
         </MainPanel>

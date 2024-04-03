@@ -15,16 +15,16 @@ const TodayWeather = () => {
     return null;
   }
   const { lon, lat, name, country } = selectedCity;
-  const { data, isPending } = useGetWeatherByCoor({ lon, lat });
+  const { data: weatherData, isPending } = useGetWeatherByCoor({ lon, lat });
 
-  if (isPending || !data) {
+  if (isPending || !weatherData) {
     return <TodayWeatherWrapper>Weather is loading..</TodayWeatherWrapper>;
   }
   const {
     main: { temp, humidity, temp_max, temp_min },
     weather,
     dt,
-  } = data;
+  } = weatherData;
 
   /* get the first weather type. Possible to have multiple weather type. but we only display the first */
   const { description, icon } = weather[0];

@@ -12,8 +12,8 @@ export const Wrapper = styled.div`
   position: relative;
   background: var(--search-bar-bg-color);
   border-radius: var(--global-border-radius);
-  height: 2.5rem;
-  padding: 0.5rem 0.65rem 0.5rem 0.65rem;
+  height: 4rem;
+  padding: 0.8rem 1rem 0.8rem 1rem;
   &.showSuggestion {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;

@@ -21,16 +21,17 @@ export const GlobalStyles = createGlobalStyle`
     width:100%;
     display: flex;
     justify-content: center;
-    font-size: var(--primary-font-size);
   }
   :root{
     /* fonts */
-    font-size: 16px; 
+    font-size: 62.5%;
     font-family: "Noto Sans", sans-serif;
     font-optical-sizing: auto;
 
-    --primary-font-size: 1rem;
-    --secondary-font-size: .625rem;
+    --font-weight-thin: 300;
+
+    --primary-font-size: 1.6rem; /* Equivalent to 16px */
+    --secondary-font-size: 1rem; /* Equivalent to 10px */
     --temperature-font-size: 4.5rem;
 
     /* colors */
@@ -49,14 +50,14 @@ export const GlobalStyles = createGlobalStyle`
     --suggestion-hover-color: #dbd0ed;
 
     /* font colors */
-    --primary-font-color: #000;
+    --primary-font-color: #222;
     --secondary-font-color: #666;
     --temperature-font-color: #6C40B5;
 
     /* layout */
     --max-layout-width: 100%;
-    --weather-icon-width: 8rem;
-    --search-panel-height: 9rem;
+    --weather-icon-width: 12.8rem;
+    --search-panel-height: 14.4rem;
 
     /* search history */
     --icon-bg: #fff; 
@@ -67,12 +68,18 @@ export const GlobalStyles = createGlobalStyle`
     --general-border-stroke: 1px solid #999;
 
     /* padding */
-    --main-panel-padding: 1.25rem 1.5rem;
+    --main-panel-padding: 2rem 2.4rem;
 
     /* border-radius */
-    --global-border-radius: .5rem;
-    --global-border-radius-1x: 1rem;
-    --global-border-radius-2x: 1.25rem;
+    --global-border-radius: .8rem;
+    --global-border-radius-1x: 1.6rem;
+    --global-border-radius-2x: 2rem;
+
+    /* transition */
+    --transition-duration: .3s;
+
+    --weather-icon-top-offset: calc(var(--weather-icon-width) / 2 * -1);
+
 
     @media (min-width: 480px) {
       /* slightly bigger phone */
@@ -82,21 +89,24 @@ export const GlobalStyles = createGlobalStyle`
 
     @media(max-width: 320px){ 
       /* galaxy-fold */
-      font-size: .7rem
+      font-size: 1rem
     }
 
     @media (min-width: 768px) {
       /* font */
-      --temperature-font-size: 5.5rem;
-      --secondary-font-size: .875rem;
+      --temperature-font-size: 9rem;
+      --secondary-font-size: 1.4rem;
 
       /* layout */
-      --weather-icon-width: 14rem;
-      --max-layout-width: 43.75rem;
-      --search-panel-height: 10rem;
+      --weather-icon-width: 27rem;
+      --max-layout-width: 70rem;
+      --search-panel-height: 18rem;
 
       /* padding */
-      --main-panel-padding: 2.5rem;
+      --main-panel-padding: 4rem;
+
+      --weather-icon-top-offset: calc(var(--weather-icon-width) / 3 * -1);
+
 
     }
 
@@ -118,7 +128,7 @@ export const GlobalStyles = createGlobalStyle`
 
 
       /* font colors */
-      --temperature-font-color: #fff;
+      --temperature-font-color: #ffffff;
 
       /* border */
       --main-panel-border-stroke: 0;
@@ -128,18 +138,20 @@ export const GlobalStyles = createGlobalStyle`
       --icon-bg: transparent; 
       --icon-bg--hover: var(--search-btn-bg-color--hover); 
 
+
     }
 
   }
   
 
   body {
+    font-size: var(--primary-font-size);
     width: 100%;
     background: var(--bg-color);
-    padding: .5rem 1rem;
+    padding: .8rem 1.6rem;
     color: var(--primary-font-color);
-    transition: background-color .3s ;
-    &:after {
+    transition: background-color var(--transition-duration) ;
+    &:after { /* adding background image as psudo element as we need to control the opacity */
       content: '';
       display: block;
       position: absolute;

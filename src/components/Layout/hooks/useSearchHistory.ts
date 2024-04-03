@@ -16,15 +16,15 @@ const useSearchHistory = () => {
     (state) => state.setSelectedCity
   );
 
-  const history: SearchItem[] = getSearchHistory();
+  const searchHistory: SearchItem[] = getSearchHistory();
 
   useEffect(() => {
     // select the last selected city when no city is selected
-    if (!selectedCity && history.length > 0) {
-      const latestSearchedCity = history[history.length - 1];
+    if (!selectedCity && searchHistory.length > 0) {
+      const latestSearchedCity = searchHistory[searchHistory.length - 1];
       setSelectedCity(latestSearchedCity);
     }
-  }, [history, selectedCity]);
+  }, [searchHistory, selectedCity]);
 
   const setSelectedCityAndPushToLocalStorage = (city: Geo | null) => {
     setSelectedCity(city);
@@ -44,8 +44,8 @@ const useSearchHistory = () => {
 
   return {
     setSelectedCityAndPushToLocalStorage,
-    deleteItem,
-    history,
+    deleteSearchHistoryItem: deleteItem,
+    searchHistory,
   };
 };
 
