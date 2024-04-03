@@ -9,12 +9,6 @@ export default styled.div`
     font-weight: var(--font-weight-thin);
     margin-bottom: 2.4rem;
   }
-
-  /* .history-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  } */
 `;
 
 export const HistoryListItem = styled.li`
@@ -24,13 +18,6 @@ export const HistoryListItem = styled.li`
   display: flex;
   justify-content: space-between;
   gap: 1.6rem;
-
-  /* .time {
-    font-size: var(--secondary-font-size);
-    [data-theme="dark"] & {
-      color: var(--half-transparent-white-color);
-    }
-  } */
 
   .content-wrapper {
     display: flex;
