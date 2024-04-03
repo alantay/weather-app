@@ -5,8 +5,10 @@ import { LOCAL_STORAGE_SEARCH_HISTORY } from "../../../constants";
 
 const useSearchHistory = ({
   setSelectedCity,
+  selectedCity,
 }: {
   setSelectedCity: (city: Geo | null) => void;
+  selectedCity: Geo | null;
 }) => {
   const {
     getItem: getSearchHistory,
@@ -16,13 +18,13 @@ const useSearchHistory = ({
 
   const history: SearchItem[] = getSearchHistory();
 
-  // Prefill selectedCity with the first item from search history on mount
   useEffect(() => {
-    if (history.length > 0) {
+    // select the last selected city when no city is selected
+    if (!selectedCity && history.length > 0) {
       const latestSearchedCity = history[history.length - 1];
       setSelectedCity(latestSearchedCity);
     }
-  }, [history]);
+  }, [history, selectedCity]);
 
   const setSelectedCityAndPushToLocalStorage = (city: Geo | null) => {
     setSelectedCity(city);
@@ -43,7 +45,6 @@ const useSearchHistory = ({
   return {
     setSelectedCityAndPushToLocalStorage,
     deleteItem,
-
     history,
   };
 };

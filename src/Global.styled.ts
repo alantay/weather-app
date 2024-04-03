@@ -54,7 +54,7 @@ export const GlobalStyles = createGlobalStyle`
     --temperature-font-color: #6C40B5;
 
     /* layout */
-    --max-layout-width: 30rem;
+    --max-layout-width: 100%;
     --weather-icon-width: 8rem;
     --search-panel-height: 9rem;
 

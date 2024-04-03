@@ -1,9 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useRef } from "react";
 import SearchBarWrapper, { SearchButton } from "./SearchBar.styled";
 import Suggestions from "./components/Suggestion";
 import TextInput from "../ui/TextInput.styled";
 import { Geo } from "../../types";
 import useSearch from "./hooks/useSearch";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 
 interface SearchBarProps {
   setSelectedCity: (city: Geo | null) => void;
@@ -16,6 +17,10 @@ const SearchBar = ({
   setSearchInput,
   searchInput,
 }: SearchBarProps) => {
+  const ref: any = useRef();
+
+  useOnClickOutside(ref, () => setShowSuggestion(false));
+
   const {
     setShowSuggestion,
     showSuggestion,
@@ -35,10 +40,11 @@ const SearchBar = ({
   };
 
   return (
-    <SearchBarWrapper>
+    <SearchBarWrapper ref={ref}>
       <form onSubmit={handleSubmit} aria-label="search form">
         <div aria-label="search place">
           <TextInput
+            autoComplete="off"
             placeholder="London, GB"
             value={searchInput}
             onChange={handleSearchInputChange}

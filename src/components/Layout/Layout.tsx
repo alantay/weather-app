@@ -11,7 +11,7 @@ const Layout = () => {
     useSelectInputCity();
 
   const { setSelectedCityAndPushToLocalStorage, deleteItem, history } =
-    useSearchHistory({ setSelectedCity });
+    useSearchHistory({ setSelectedCity, selectedCity });
 
   return (
     <Styled>
