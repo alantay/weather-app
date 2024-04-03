@@ -27,7 +27,6 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   };
 
   const setSelectedCityAndShowSuggestion = (city: Geo | null) => {
-    console.log({ city });
     setSearchInput(`${city?.name}, ${city?.country}`);
     setSelectedCity(city);
     setShowSuggestion(false);
@@ -35,8 +34,8 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
 
   return (
     <SearchBarStyled>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} aria-label="search form">
+        <div aria-label="search place">
           <TextInputStyled
             label="Country"
             placeholder="London, GB"

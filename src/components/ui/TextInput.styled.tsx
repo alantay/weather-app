@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default (props: any) => {
   return (
     <Wrapper {...props}>
-      <label>{props.label}</label>
+      <label htmlFor="search-input">{props.label}</label>
       <InputStyled {...props} />
     </Wrapper>
   );
@@ -30,7 +30,10 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const InputStyled = styled.input.attrs({ type: "text" })`
+export const InputStyled = styled.input.attrs({
+  type: "text",
+  id: "search-input",
+})`
   position: relative;
   width: 100%;
   height: 100%;

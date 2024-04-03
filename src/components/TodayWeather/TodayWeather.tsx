@@ -38,7 +38,7 @@ const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
 
         <div className="other-details-wrapper">
           <span>{getDateTimeFromUnix(dt)}</span>
-          <span className="humidity">Humidity {humidity}%</span>
+          <span className="humidity">Humidity: {humidity}%</span>
           <span className="weather">{weatherPrint}</span>
         </div>
       </div>

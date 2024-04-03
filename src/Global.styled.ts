@@ -78,7 +78,7 @@ export const GlobalStyles = createGlobalStyle`
 
 
       /* layout */
-      --weather-icon-width: 15rem;
+      --weather-icon-width: 13rem;
 
 
     }

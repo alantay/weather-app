@@ -11,7 +11,7 @@ const Suggestions = ({
   return (
     <Styled>
       {!data?.length && <div className="no-result">No result</div>}
-      {data?.length &&
+      {!!data?.length &&
         data.map((d, idx) => {
           const { name, country } = d;
           const nameCountry = `${name}, ${country}`;

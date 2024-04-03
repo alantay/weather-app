@@ -34,6 +34,9 @@ export const HistoryItem = styled.li`
   }
 
   .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
   }
 
   .actions {
@@ -43,7 +46,7 @@ export const HistoryItem = styled.li`
 
   @media (min-width: 768px) {
     .content-wrapper {
-      display: flex;
+      flex-direction: row;
       flex: 1;
       justify-content: space-between;
       align-items: center;
