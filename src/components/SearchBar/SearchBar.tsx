@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import SearchBarWrapper, { SearchButton } from "./SearchBar.styled";
 import Suggestions from "./components/Suggestion";
 import TextInput from "../ui/TextInput.styled";
@@ -6,19 +7,22 @@ import useSearch from "./hooks/useSearch";
 
 interface SearchBarProps {
   setSelectedCity: (city: Geo | null) => void;
+  setSearchInput: (str: string) => void;
+  searchInput: string;
 }
 
-const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
+const SearchBar = ({
+  setSelectedCity,
+  setSearchInput,
+  searchInput,
+}: SearchBarProps) => {
   const {
-    setSearchInput,
-    searchInput,
     setShowSuggestion,
     showSuggestion,
     handleSubmit,
-    handleSearchInputChange,
     geoData,
     isLoading,
-  } = useSearch();
+  } = useSearch({ searchInput });
 
   const setSelectedCityAndShowSuggestion = (city: Geo | null) => {
     setSearchInput(`${city?.name}, ${city?.country}`);
@@ -26,12 +30,15 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
     setShowSuggestion(false);
   };
 
+  const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+  };
+
   return (
     <SearchBarWrapper>
       <form onSubmit={handleSubmit} aria-label="search form">
         <div aria-label="search place">
           <TextInput
-            label="Country"
             placeholder="London, GB"
             value={searchInput}
             onChange={handleSearchInputChange}

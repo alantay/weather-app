@@ -3,7 +3,6 @@ import styled from "styled-components";
 export default (props: any) => {
   return (
     <Wrapper {...props}>
-      <label htmlFor="search-input">{props.label}</label>
       <InputStyled {...props} />
     </Wrapper>
   );
@@ -14,19 +13,10 @@ export const Wrapper = styled.div`
   background: var(--search-bar-bg-color);
   border-radius: var(--global-border-radius);
   height: 2.5rem;
-  padding: 0.8rem 0.65rem 0.3rem 0.65rem;
+  padding: 0.5rem 0.65rem 0.5rem 0.65rem;
   &.showSuggestion {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-  }
-
-  label {
-    position: absolute;
-    font-size: 0.6rem;
-    opacity: 0.4;
-    color: var(--primary-font-color);
-    top: 0.2rem;
-    left: 0.65rem;
   }
 `;
 

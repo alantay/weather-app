@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Geo, SearchItem } from "../../../types";
 import useArrayLocalStorage from "../../../hooks/useArrayLocalStorage";
 import { LOCAL_STORAGE_SEARCH_HISTORY } from "../../../constants";
 
-const useSearchHistory = () => {
-  const [selectedCity, setSelectedCity] = useState<Geo | null>(null);
-
+const useSearchHistory = ({
+  setSelectedCity,
+}: {
+  setSelectedCity: (city: Geo | null) => void;
+}) => {
   const {
     getItem: getSearchHistory,
     pushItem: pushSearchIntoHistory,
@@ -41,8 +43,7 @@ const useSearchHistory = () => {
   return {
     setSelectedCityAndPushToLocalStorage,
     deleteItem,
-    selectedCity,
-    setSelectedCity,
+
     history,
   };
 };

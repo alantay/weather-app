@@ -14,24 +14,32 @@ interface SearchHistoryProps {
   history: SearchItem[];
   deleteItem: (d: number) => void;
   setSelectedCity: (city: Geo) => void;
+  setSearchInput: (city: string) => void;
 }
 
 const SearchHistory = ({
   history,
   deleteItem,
   setSelectedCity,
+  setSearchInput,
 }: SearchHistoryProps) => {
-  const itemSearchHandler = ({ country, lat, lon, name }: SearchItem) => {
+  const historySearchClickHandler = ({
+    country,
+    lat,
+    lon,
+    name,
+  }: SearchItem) => {
     setSelectedCity({
       country,
       lat,
       lon,
       name,
     });
+    setSearchInput(`${name}, ${country}`);
   };
 
   const renderHistory = () => {
-    return history.map((historyItem: SearchItem) => {
+    return [...history].reverse().map((historyItem: SearchItem) => {
       const { id, name, country, time } = historyItem;
       const cityName = `${name}, ${country}`;
       return (
@@ -43,7 +51,7 @@ const SearchHistory = ({
           <div className="actions">
             <IconBtn
               type="button"
-              onClick={() => itemSearchHandler(historyItem)}
+              onClick={() => historySearchClickHandler(historyItem)}
             >
               <SearchIcon />
             </IconBtn>
