@@ -6,13 +6,13 @@ import SearchHistoryWrapper, {
 } from "./SearchHistory.styled";
 import { useSearchInputStore } from "../../store";
 import { getDateTimeFromUnix } from "../../utils";
-import { Geo, SearchItem } from "../../types";
+import { Geo, SearchHistoryItem } from "../../types";
 import SearchIcon from "../../assets/history-item-search.svg?react";
 import TrashIcon from "../../assets/trash-icon.svg?react";
 import IconBtn from "../ui/IconBtn.styled";
 
 interface SearchHistoryProps {
-  searchHistory: SearchItem[];
+  searchHistory: SearchHistoryItem[];
   deleteSearchHistoryItem: (d: number) => void;
   setSelectedCity: (city: Geo) => void;
 }
@@ -29,7 +29,7 @@ const SearchHistory = ({
     lat,
     lon,
     name,
-  }: SearchItem) => {
+  }: SearchHistoryItem) => {
     setSelectedCity({
       country,
       lat,
@@ -40,29 +40,34 @@ const SearchHistory = ({
   };
 
   const renderHistory = () => {
-    return [...searchHistory].reverse().map((historyItem: SearchItem) => {
-      const { id, name, country, time } = historyItem;
-      const cityName = `${name}, ${country}`;
-      return (
-        <HistoryListItem key={time}>
-          <div className="content-wrapper">
-            <City aria-label="city-name">{cityName}</City>
-            <Time aria-label="time">{getDateTimeFromUnix(time)}</Time>
-          </div>
-          <div className="actions">
-            <IconBtn
-              type="button"
-              onClick={() => historySearchClickHandler(historyItem)}
-            >
-              <SearchIcon />
-            </IconBtn>
-            <IconBtn type="button" onClick={() => deleteSearchHistoryItem(id)}>
-              <TrashIcon />
-            </IconBtn>
-          </div>
-        </HistoryListItem>
-      );
-    });
+    return [...searchHistory]
+      .reverse()
+      .map((historyItem: SearchHistoryItem) => {
+        const { id, name, country, time } = historyItem;
+        const cityName = `${name}, ${country}`;
+        return (
+          <HistoryListItem key={time}>
+            <div className="content-wrapper">
+              <City aria-label="city-name">{cityName}</City>
+              <Time aria-label="time">{getDateTimeFromUnix(time)}</Time>
+            </div>
+            <div className="actions">
+              <IconBtn
+                type="button"
+                onClick={() => historySearchClickHandler(historyItem)}
+              >
+                <SearchIcon />
+              </IconBtn>
+              <IconBtn
+                type="button"
+                onClick={() => deleteSearchHistoryItem(id)}
+              >
+                <TrashIcon />
+              </IconBtn>
+            </div>
+          </HistoryListItem>
+        );
+      });
   };
 
   return (

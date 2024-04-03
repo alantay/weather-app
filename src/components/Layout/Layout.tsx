@@ -1,4 +1,4 @@
-import Styled, { MainPanel } from "./Layout.styled";
+import Styled, { MainPanel, FirstVisitMsg } from "./Layout.styled";
 import SearchBar from "../SearchBar";
 import TodayWeather from "../TodayWeather";
 import SearchHistory from "../SearchHistory";
@@ -19,8 +19,11 @@ const Layout = () => {
     <Styled>
       <ThemeToggle />
       <SearchBar setSelectedCity={setSelectedCityAndPushToLocalStorage} />
-      {!!history.length && (
-        <MainPanel>
+      {!searchHistory.length && (
+        <FirstVisitMsg>Get started by searching for a city.</FirstVisitMsg>
+      )}
+      {!!searchHistory.length && (
+        <MainPanel aria-label="main content">
           {selectedCity && <TodayWeather />}
           <SearchHistory
             searchHistory={searchHistory}

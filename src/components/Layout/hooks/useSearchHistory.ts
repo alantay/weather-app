@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Geo, SearchItem } from "../../../types";
+import { Geo, SearchHistoryItem } from "../../../types";
 import useArrayLocalStorage from "../../../hooks/useArrayLocalStorage";
 import { LOCAL_STORAGE_SEARCH_HISTORY } from "../../../constants";
 import { useSelectedCityStore } from "../../../store";
@@ -9,14 +9,14 @@ const useSearchHistory = () => {
     getItem: getSearchHistory,
     pushItem: pushSearchIntoHistory,
     deleteItem,
-  } = useArrayLocalStorage<SearchItem>(LOCAL_STORAGE_SEARCH_HISTORY);
+  } = useArrayLocalStorage<SearchHistoryItem>(LOCAL_STORAGE_SEARCH_HISTORY);
 
   const selectedCity = useSelectedCityStore((state) => state.selectedCity);
   const setSelectedCity = useSelectedCityStore(
     (state) => state.setSelectedCity
   );
 
-  const searchHistory: SearchItem[] = getSearchHistory();
+  const searchHistory: SearchHistoryItem[] = getSearchHistory();
 
   useEffect(() => {
     // select the last selected city when no city is selected
@@ -33,8 +33,8 @@ const useSearchHistory = () => {
         push city into search historylocalstorage together with timestamp
       */
       const now = Date.now();
-      const si: SearchItem = {
-        id: now,
+      const si: SearchHistoryItem = {
+        id: now, // use timestamp as id for easy deletion on search item later on
         time: now,
         ...city,
       };

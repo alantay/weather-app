@@ -59,10 +59,6 @@ export const GlobalStyles = createGlobalStyle`
     --weather-icon-width: 12.8rem;
     --search-panel-height: 14.4rem;
 
-    /* search history */
-    --icon-bg: #fff; 
-    --icon-bg--hover: #efd6ff; 
-
     /* border */
     --main-panel-border-stroke: 1px solid #FFFFFF80;
     --general-border-stroke: 1px solid #999;
@@ -81,15 +77,20 @@ export const GlobalStyles = createGlobalStyle`
     --weather-icon-top-offset: calc(var(--weather-icon-width) / 2 * -1);
 
 
+    /* Layout */
+    --first-visit-content-margin-top: -7rem;
+    --first-visit-content-font-size: 2.5rem;
+    --first-visit-content-font-color: #22222266;
+
+    /* search history */
+    --icon-bg: #fff; 
+    --icon-bg--hover: #efd6ff; 
+
+     
+
     @media (min-width: 480px) {
       /* slightly bigger phone */
 
-    }
-
-
-    @media(max-width: 320px){ 
-      /* galaxy-fold */
-      font-size: 1rem
     }
 
     @media (min-width: 768px) {
@@ -107,6 +108,9 @@ export const GlobalStyles = createGlobalStyle`
 
       --weather-icon-top-offset: calc(var(--weather-icon-width) / 3 * -1);
 
+      /* Layout */
+      --first-visit-content-margin-top: -11rem;
+      --first-visit-content-font-size: 4rem;
 
     }
 
@@ -138,6 +142,8 @@ export const GlobalStyles = createGlobalStyle`
       --icon-bg: transparent; 
       --icon-bg--hover: var(--search-btn-bg-color--hover); 
 
+      /* Layout */
+      --first-visit-content-font-color: #ffffff66;
 
     }
 

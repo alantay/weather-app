@@ -10,7 +10,7 @@ export type Geo = {
   country: string;
 };
 
-export type weatherType = {
+export type WeatherType = {
   description: string;
   icon: string;
   main: string;
@@ -24,7 +24,11 @@ export type WeatherDTO = {
     temp_max: number;
     temp_min: number;
   };
-  weather: weatherType[];
+  weather: WeatherType[];
 };
 
-export type SearchItem = Geo & { id: number; time: number };
+/*
+ * search history item type is almost like geo as we are also storing the coordinates
+ * the coordinates is used for searching as it save us from fetching it again
+ */
+export type SearchHistoryItem = Geo & { id: number; time: number };

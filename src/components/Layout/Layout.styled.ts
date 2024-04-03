@@ -18,3 +18,10 @@ export const MainPanel = styled.div`
     margin-top: 2rem;
   }
 `;
+
+export const FirstVisitMsg = styled.div`
+  margin-top: var(--first-visit-content-margin-top);
+  font-size: var(--first-visit-content-font-size);
+  font-weight: 100;
+  color: var(--first-visit-content-font-color);
+`;
