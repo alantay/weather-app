@@ -1,30 +1,24 @@
-import { useState, ChangeEvent } from "react";
-import SearchBarStyled, { SearchButton } from "./SearchBar.styled";
-import { useGetGeoLocationByName } from "../../services/queries";
+import SearchBarWrapper, { SearchButton } from "./SearchBar.styled";
 import Suggestions from "./components/Suggestion";
-import TextInputStyled from "../ui/TextInput.styled";
+import TextInput from "../ui/TextInput.styled";
 import { Geo } from "../../types";
+import useSearch from "./hooks/useSearch";
 
 interface SearchBarProps {
   setSelectedCity: (city: Geo | null) => void;
 }
 
 const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
-  const [searchInput, setSearchInput] = useState("");
-  const [showSuggestion, setShowSuggestion] = useState(false);
-
-  const { data: geoData, refetch: reFetchGeo } =
-    useGetGeoLocationByName(searchInput);
-
-  const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchInput(e.target.value);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await reFetchGeo();
-    setShowSuggestion(true);
-  };
+  const {
+    setSearchInput,
+    searchInput,
+    setShowSuggestion,
+    showSuggestion,
+    handleSubmit,
+    handleSearchInputChange,
+    geoData,
+    isLoading,
+  } = useSearch();
 
   const setSelectedCityAndShowSuggestion = (city: Geo | null) => {
     setSearchInput(`${city?.name}, ${city?.country}`);
@@ -33,10 +27,10 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   };
 
   return (
-    <SearchBarStyled>
+    <SearchBarWrapper>
       <form onSubmit={handleSubmit} aria-label="search form">
         <div aria-label="search place">
-          <TextInputStyled
+          <TextInput
             label="Country"
             placeholder="London, GB"
             value={searchInput}
@@ -47,13 +41,14 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
             <Suggestions
               data={geoData}
               setSelection={setSelectedCityAndShowSuggestion}
+              isLoading={isLoading}
             />
           )}
         </div>
 
-        <SearchButton type="submit"></SearchButton>
+        <SearchButton type="submit" />
       </form>
-    </SearchBarStyled>
+    </SearchBarWrapper>
   );
 };
 

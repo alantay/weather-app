@@ -55,7 +55,7 @@ export const GlobalStyles = createGlobalStyle`
 
     /* layout */
     --max-layout-width: 30rem;
-    --weather-icon-width: 10rem;
+    --weather-icon-width: 8rem;
     --search-panel-height: 9rem;
 
     /* search history */
@@ -78,7 +78,6 @@ export const GlobalStyles = createGlobalStyle`
 
 
       /* layout */
-      --weather-icon-width: 13rem;
 
 
     }
@@ -89,7 +88,7 @@ export const GlobalStyles = createGlobalStyle`
       --secondary-font-size: .875rem;
 
       /* layout */
-      --weather-icon-width: 17rem;
+      --weather-icon-width: 14rem;
       --max-layout-width: 43.75rem;
       --search-panel-height: 10rem;
 
@@ -124,7 +123,7 @@ export const GlobalStyles = createGlobalStyle`
 
        /* search history */
       --icon-bg: transparent; 
-      --icon-bg--hover: #333; 
+      --icon-bg--hover: var(--search-btn-bg-color--hover); 
 
     }
 

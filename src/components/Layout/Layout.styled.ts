@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import WeatherIcon from "../../assets/weather-icon.svg";
+import WeatherIcon from "../../assets/cloudy.png";
 
 export default styled.div`
   width: 100%;
@@ -17,16 +17,5 @@ export const MainPanel = styled.div`
   position: relative;
   > * + * {
     margin-top: 1.25rem;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: calc(var(--weather-icon-width) / 3 * -1);
-    right: 0.5rem;
-    background-image: url(${WeatherIcon});
-    background-size: cover;
-    width: var(--weather-icon-width);
-    aspect-ratio: 1/1;
   }
 `;

@@ -1,4 +1,9 @@
-import Styled, { HistoryItem } from "./SearchHistory.styled";
+import SearchHistoryWrapper, {
+  HistoryListItem,
+  Time,
+  City,
+  HistoryListing,
+} from "./SearchHistory.styled";
 import { getDateTimeFromUnix } from "../../utils";
 import { Geo, SearchItem } from "../../types";
 import SearchIcon from "../../assets/history-item-search.svg?react";
@@ -16,26 +21,24 @@ const SearchHistory = ({
   deleteItem,
   setSelectedCity,
 }: SearchHistoryProps) => {
-  const itemSearchHandler = (historyItem: SearchItem) => {
+  const itemSearchHandler = ({ country, lat, lon, name }: SearchItem) => {
     setSelectedCity({
-      country: historyItem.country,
-      lat: historyItem.lat,
-      lon: historyItem.lon,
-      name: historyItem.name,
+      country,
+      lat,
+      lon,
+      name,
     });
   };
 
   const renderHistory = () => {
-    return history.map((historyItem) => {
+    return history.map((historyItem: SearchItem) => {
       const { id, name, country, time } = historyItem;
       const cityName = `${name}, ${country}`;
       return (
-        <HistoryItem key={time}>
+        <HistoryListItem key={time}>
           <div className="content-wrapper">
-            <div aria-label="city-name">{cityName}</div>
-            <div aria-label="time" className="time">
-              {getDateTimeFromUnix(time)}
-            </div>
+            <City aria-label="city-name">{cityName}</City>
+            <Time aria-label="time">{getDateTimeFromUnix(time)}</Time>
           </div>
           <div className="actions">
             <IconBtn
@@ -48,16 +51,16 @@ const SearchHistory = ({
               <TrashIcon />
             </IconBtn>
           </div>
-        </HistoryItem>
+        </HistoryListItem>
       );
     });
   };
 
   return (
-    <Styled>
+    <SearchHistoryWrapper>
       <h3>Search History</h3>
-      <ul className="history-wrapper">{renderHistory()}</ul>
-    </Styled>
+      <HistoryListing>{renderHistory()}</HistoryListing>
+    </SearchHistoryWrapper>
   );
 };
 

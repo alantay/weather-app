@@ -10,14 +10,14 @@ export default styled.div`
     margin-bottom: 1.5rem;
   }
 
-  .history-wrapper {
+  /* .history-wrapper {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
+  } */
 `;
 
-export const HistoryItem = styled.li`
+export const HistoryListItem = styled.li`
   background-color: var(--low-opacity-color-2);
   padding: 1rem 0.75rem;
   border-radius: var(--global-border-radius-1x);
@@ -26,12 +26,12 @@ export const HistoryItem = styled.li`
   gap: 1rem;
   font-weight: 300;
 
-  .time {
+  /* .time {
     font-size: var(--secondary-font-size);
     [data-theme="dark"] & {
       color: var(--half-transparent-white-color);
     }
-  }
+  } */
 
   .content-wrapper {
     display: flex;
@@ -52,4 +52,19 @@ export const HistoryItem = styled.li`
       align-items: center;
     }
   }
+`;
+
+export const Time = styled.div`
+  font-size: var(--secondary-font-size);
+  [data-theme="dark"] & {
+    color: var(--half-transparent-white-color);
+  }
+`;
+
+export const City = styled.div``;
+
+export const HistoryListing = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;

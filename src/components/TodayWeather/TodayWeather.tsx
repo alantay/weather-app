@@ -1,48 +1,54 @@
 import { Geo } from "../../types";
-import Styled from "./TodayWeather.styled";
+import TodayWeatherWrapper, {
+  TemperatureWrapper,
+  Temperature,
+  WeatherTypeDetails,
+  City,
+} from "./TodayWeather.styled";
 import { useGetWeatherByCoor } from "../../services/queries";
 import { formatTemperature, getDateTimeFromUnix } from "../../utils";
+import { openWeatherIconToLocalIconMap } from "./utils";
 
 const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
-  console.log({ selectedCity });
   const { lon, lat, name, country } = selectedCity;
   const { data, isPending } = useGetWeatherByCoor({ lon, lat });
 
   if (isPending || !data) {
-    return <div>is loading..</div>;
+    return <TodayWeatherWrapper>Weather is loading..</TodayWeatherWrapper>;
   }
-  console.log({ data });
   const {
     main: { temp, humidity, temp_max, temp_min },
     weather,
     dt,
   } = data;
 
-  const weatherPrint = weather.map(({ description }) => description).join(", ");
+  // const weatherPrint = weather.map(({ description }) => description).join(", ");
+  const { description, icon } = weather[0];
+
   return (
-    <Styled>
+    <TodayWeatherWrapper $weatherIcon={openWeatherIconToLocalIconMap(icon)}>
       <div role="heading">Today's Weather</div>
 
       <div className="weather-details">
-        <div className="temperature-wrapper">
-          <span className="temperature" role="temperature">
+        <TemperatureWrapper>
+          <Temperature className="temperature" role="temperature">
             {formatTemperature(temp)}
-          </span>
+          </Temperature>
           <span className="temp-max-min">
             H: {formatTemperature(temp_max)} L: {formatTemperature(temp_min)}
           </span>
-          <span className="city-country">
+          <City>
             {name}, {country}
-          </span>
-        </div>
+          </City>
+        </TemperatureWrapper>
 
-        <div className="other-details-wrapper">
+        <WeatherTypeDetails className="other-details-wrapper">
           <span>{getDateTimeFromUnix(dt)}</span>
           <span className="humidity">Humidity: {humidity}%</span>
-          <span className="weather">{weatherPrint}</span>
-        </div>
+          <span className="weather">{description}</span>
+        </WeatherTypeDetails>
       </div>
-    </Styled>
+    </TodayWeatherWrapper>
   );
 };
 

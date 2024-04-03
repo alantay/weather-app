@@ -1,27 +1,32 @@
-import Styled from "./Suggestion.styled";
+import SuggestionListing from "./Suggestion.styled";
 import { Geo } from "../../../types";
 
 const Suggestions = ({
   data,
   setSelection,
+  isLoading,
 }: {
-  data: Geo[];
+  data: Geo[] | undefined;
   setSelection: (g: Geo) => void;
+  isLoading: boolean;
 }) => {
   return (
-    <Styled>
-      {!data?.length && <div className="no-result">No result</div>}
+    <SuggestionListing>
+      {!isLoading && !data?.length && (
+        <div className="no-result">No result</div>
+      )}
+      {isLoading && <div className="is-loading">Result is Loading...</div>}
       {!!data?.length &&
-        data.map((d, idx) => {
-          const { name, country } = d;
+        data.map((city: Geo, idx: number) => {
+          const { name, country } = city;
           const nameCountry = `${name}, ${country}`;
           return (
-            <li key={idx} onClick={() => setSelection(d)} role="button">
+            <li key={idx} onClick={() => setSelection(city)} role="button">
               {nameCountry}
             </li>
           );
         })}
-    </Styled>
+    </SuggestionListing>
   );
 };
 

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+import Toggle from "./ThemeToggle.styled";
 
 const ThemeToggle = () => {
   const [isDark, setIsDark] = useState<boolean>(() => {
     const prefersDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+      "(prefers-color-scheme: dark)" // get user's browser preference
     ).matches;
     const storageDark = localStorage.getItem("dark");
-    return storageDark ? JSON.parse(storageDark) : prefersDarkMode;
+    return storageDark ? JSON.parse(storageDark) : prefersDarkMode; // default to user's browser preference if localstorage has no theme record
   });
 
   useEffect(() => {
@@ -31,19 +31,3 @@ const ThemeToggle = () => {
 };
 
 export default ThemeToggle;
-
-const Toggle = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 0.6rem;
-  color: var(--primary-font-color);
-  opacity: 0.5;
-  transition: opacity 0.3s;
-  &:hover {
-    opacity: 1;
-  }
-`;

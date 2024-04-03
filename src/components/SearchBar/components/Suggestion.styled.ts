@@ -15,7 +15,9 @@ export default styled.ul`
     }
   }
 
-  .no-result {
+  .no-result,
+  .is-loading {
     padding: 0.25rem 0.5rem;
+    opacity: 0.5;
   }
 `;

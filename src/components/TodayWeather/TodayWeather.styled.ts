@@ -1,6 +1,22 @@
 import styled from "styled-components";
 
-export default styled.div`
+interface WeatherDetailsProps {
+  $weatherIcon?: string; // Assuming weatherIcon is a URL string
+}
+const WeatherDetails = styled.div<WeatherDetailsProps>`
+  &::before {
+    /* Weather Icon Pseudo element */
+    content: "";
+    position: absolute;
+    top: calc(var(--weather-icon-width) / 3 * -1);
+    right: 0.5rem;
+    background-image: url(${(props) => props.$weatherIcon});
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: var(--weather-icon-width);
+    aspect-ratio: 1/1;
+  }
+
   .weather-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -10,41 +26,44 @@ export default styled.div`
       grid-template-columns: 12rem 1fr;
     }
   }
+`;
 
-  .temperature-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .temperature {
-    color: var(--temperature-font-color);
-    font-size: var(--temperature-font-size);
-    font-weight: 700;
-    line-height: 1;
-  }
+export const TemperatureWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+`;
 
-  .city-country {
-    font-weight: 700;
-    color: var(--secondary-font-color);
-  }
+export const Temperature = styled.span`
+  color: var(--temperature-font-color);
+  font-size: var(--temperature-font-size);
+  font-weight: 700;
+  line-height: 1;
+`;
 
-  .other-details-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    justify-content: flex-start;
-    flex-flow: column-reverse;
-    color: var(--secondary-font-color);
-    gap: 0.4rem;
-    font-weight: 300;
+export const City = styled.span`
+  font-weight: 700;
+  color: var(--secondary-font-color);
+`;
 
-    @media (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-between;
-    }
+export const WeatherTypeDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: flex-start;
+  flex-flow: column-reverse;
+  color: var(--secondary-font-color);
+  gap: 0.4rem;
+  font-weight: 300;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .weather {
     text-transform: capitalize;
   }
 `;
+
+export default WeatherDetails;
