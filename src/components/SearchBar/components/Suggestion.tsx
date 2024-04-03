@@ -8,18 +8,19 @@ const Suggestions = ({
   data: Geo[];
   setSelection: (g: Geo) => void;
 }) => {
-  if (!data?.length) return <div>No result</div>;
   return (
     <Styled>
-      {data.map((d) => {
-        const { name, country } = d;
-        const nameCountry = `${name}, ${country}`;
-        return (
-          <li key={nameCountry} onClick={() => setSelection(d)}>
-            {nameCountry}
-          </li>
-        );
-      })}
+      {!data?.length && <div className="no-result">No result</div>}
+      {data?.length &&
+        data.map((d, idx) => {
+          const { name, country } = d;
+          const nameCountry = `${name}, ${country}`;
+          return (
+            <li key={idx} onClick={() => setSelection(d)} role="button">
+              {nameCountry}
+            </li>
+          );
+        })}
     </Styled>
   );
 };

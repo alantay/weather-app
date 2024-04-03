@@ -4,6 +4,11 @@ export default styled.div`
   .weather-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    position: relative;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 12rem 1fr;
+    }
   }
 
   .temperature-wrapper {
@@ -12,8 +17,8 @@ export default styled.div`
     gap: 0.4rem;
   }
   .temperature {
-    color: var(--primary-color);
-    font-size: 4.5rem;
+    color: var(--temperature-font-color);
+    font-size: var(--temperature-font-size);
     font-weight: 700;
     line-height: 1;
   }
@@ -32,5 +37,14 @@ export default styled.div`
     color: var(--secondary-font-color);
     gap: 0.4rem;
     font-weight: 300;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .weather {
+    text-transform: capitalize;
   }
 `;

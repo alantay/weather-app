@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import useArrayLocalStorage from "../../hooks/useArrayLocalStorage";
 import { Geo, SearchItem } from "../../types";
 import { LOCAL_STORAGE_SEARCH_HISTORY } from "../../constants";
-import Styled from "./Layout.styled";
+import Styled, { MainPanel } from "./Layout.styled";
 import SearchBar from "../SearchBar";
 import TodayWeather from "../TodayWeather";
 import SearchHistory from "../SearchHistory";
+import ThemeToggle from "../ThemeToggle";
 
 const Layout = () => {
   const [selectedCity, setSelectedCity] = useState<Geo | null>(null);
@@ -15,6 +16,7 @@ const Layout = () => {
     pushItem: pushSearchIntoHistory,
     deleteItem,
   } = useArrayLocalStorage<SearchItem>(LOCAL_STORAGE_SEARCH_HISTORY);
+
   const history: SearchItem[] = getSearchHistory();
 
   // Prefill selectedCity with the first item from search history on mount
@@ -28,7 +30,9 @@ const Layout = () => {
   const setSelectedCityAndPushToLocalStorage = (city: Geo | null) => {
     setSelectedCity(city);
     if (city) {
-      // if city is selected, push it into search historylocalstorage
+      /* 
+        push city into search historylocalstorage together with timestamp
+      */
       const now = Date.now();
       const si: SearchItem = {
         id: now,
@@ -41,15 +45,18 @@ const Layout = () => {
 
   return (
     <Styled>
+      <ThemeToggle />
       <SearchBar setSelectedCity={setSelectedCityAndPushToLocalStorage} />
-      <div className="main-panel">
-        {selectedCity && <TodayWeather selectedCity={selectedCity} />}
-        <SearchHistory
-          history={history}
-          deleteItem={deleteItem}
-          setSelectedCity={setSelectedCity}
-        />
-      </div>
+      {!!history.length && (
+        <MainPanel>
+          {selectedCity && <TodayWeather selectedCity={selectedCity} />}
+          <SearchHistory
+            history={history}
+            deleteItem={deleteItem}
+            setSelectedCity={setSelectedCity}
+          />
+        </MainPanel>
+      )}
     </Styled>
   );
 };

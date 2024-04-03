@@ -18,7 +18,7 @@ const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
     dt,
   } = data;
 
-  const weatherPrint = weather.map(({ main }) => main).join(", ");
+  const weatherPrint = weather.map(({ description }) => description).join(", ");
   return (
     <Styled>
       <div role="heading">Today's Weather</div>
@@ -29,7 +29,7 @@ const TodayWeather = ({ selectedCity }: { selectedCity: Geo }) => {
             {formatTemperature(temp)}
           </span>
           <span className="temp-max-min">
-            H:{formatTemperature(temp_max)} L:{formatTemperature(temp_min)}
+            H: {formatTemperature(temp_max)} L: {formatTemperature(temp_min)}
           </span>
           <span className="city-country">
             {name}, {country}

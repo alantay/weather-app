@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import SearchBarStyled from "./SearchBar.styled";
+import SearchBarStyled, { SearchButton } from "./SearchBar.styled";
 import { useGetGeoLocationByName } from "../../services/queries";
 import Suggestions from "./components/Suggestion";
 import TextInputStyled from "../ui/TextInput.styled";
@@ -27,6 +27,8 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   };
 
   const setSelectedCityAndShowSuggestion = (city: Geo | null) => {
+    console.log({ city });
+    setSearchInput(`${city?.name}, ${city?.country}`);
     setSelectedCity(city);
     setShowSuggestion(false);
   };
@@ -36,6 +38,8 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
       <form onSubmit={handleSubmit}>
         <div>
           <TextInputStyled
+            label="Country"
+            placeholder="London, GB"
             value={searchInput}
             onChange={handleSearchInputChange}
             className={showSuggestion ? "showSuggestion" : ""}
@@ -48,7 +52,7 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
           )}
         </div>
 
-        <button type="submit"></button>
+        <SearchButton type="submit"></SearchButton>
       </form>
     </SearchBarStyled>
   );

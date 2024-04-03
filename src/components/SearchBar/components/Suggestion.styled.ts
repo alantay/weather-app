@@ -6,11 +6,16 @@ export default styled.ul`
   border-radius: var(--global-border-radius);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-top: 1px solid #999;
+  border-top: var(--general-border-stroke);
   li {
     padding: 0.25rem 0.5rem;
+    cursor: pointer;
     &:hover {
-      background-color: #dbd0ed;
+      background-color: var(--suggestion-hover-color);
     }
+  }
+
+  .no-result {
+    padding: 0.25rem 0.5rem;
   }
 `;

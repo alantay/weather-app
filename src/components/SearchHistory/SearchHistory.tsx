@@ -1,8 +1,9 @@
-import Styled from "./SearchHistory.styled";
+import Styled, { HistoryItem } from "./SearchHistory.styled";
 import { getDateTimeFromUnix } from "../../utils";
 import { Geo, SearchItem } from "../../types";
-import SearchIcon from "../../assets/history-item-search.svg";
-import TrashIcon from "../../assets/trash-icon.svg";
+import SearchIcon from "../../assets/history-item-search.svg?react";
+import TrashIcon from "../../assets/trash-icon.svg?react";
+import IconBtn from "../ui/IconBtn";
 
 interface SearchHistoryProps {
   history: SearchItem[];
@@ -27,22 +28,27 @@ const SearchHistory = ({
   const renderHistory = () => {
     return history.map((historyItem) => {
       const { id, name, country, time } = historyItem;
-      const nameCountry = `${name}, ${country}`;
+      const cityName = `${name}, ${country}`;
       return (
-        <li className="history" key={nameCountry}>
-          <div>
-            <div role="name-country">{nameCountry}</div>
-            <div className="time">{getDateTimeFromUnix(time)}</div>
+        <HistoryItem key={time}>
+          <div className="content-wrapper">
+            <div aria-label="city-name">{cityName}</div>
+            <div aria-label="time" className="time">
+              {getDateTimeFromUnix(time)}
+            </div>
           </div>
           <div className="actions">
-            <button onClick={() => itemSearchHandler(historyItem)}>
-              <img src={SearchIcon} alt="Search Icon" />
-            </button>
-            <button onClick={() => deleteItem(id)}>
-              <img src={TrashIcon} alt="Trash Icon" />
-            </button>
+            <IconBtn
+              type="button"
+              onClick={() => itemSearchHandler(historyItem)}
+            >
+              <SearchIcon />
+            </IconBtn>
+            <IconBtn type="button" onClick={() => deleteItem(id)}>
+              <TrashIcon />
+            </IconBtn>
           </div>
-        </li>
+        </HistoryItem>
       );
     });
   };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default (props: any) => {
   return (
     <Wrapper {...props}>
-      <label>Country</label>
+      <label>{props.label}</label>
       <InputStyled {...props} />
     </Wrapper>
   );
@@ -24,8 +24,8 @@ export const Wrapper = styled.div`
     position: absolute;
     font-size: 0.6rem;
     opacity: 0.4;
-    color: black;
-    top: 0.25rem;
+    color: var(--primary-font-color);
+    top: 0.2rem;
     left: 0.65rem;
   }
 `;
