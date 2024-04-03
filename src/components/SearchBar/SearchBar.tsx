@@ -16,6 +16,7 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   const searchInput = useSearchInputStore((state) => state.searchInput);
   const setSearchInput = useSearchInputStore((state) => state.setSearchInput);
 
+  // hook to close suggestion upon outside click
   useOnClickOutside(ref, () => setShowSuggestion(false));
 
   const {
@@ -24,11 +25,12 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
     handleSubmit,
     geoData,
     isLoading,
-    error,
   } = useSearch({ searchInput });
 
   const setSelectedCityAndShowSuggestion = (city: Geo | null) => {
+    // get search input to reflect selected city
     setSearchInput(`${city?.name}, ${city?.country}`);
+
     setSelectedCity(city);
     setShowSuggestion(false);
   };
@@ -36,7 +38,6 @@ const SearchBar = ({ setSelectedCity }: SearchBarProps) => {
   const handleSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
-  if (error) return <div>{error.message}</div>;
 
   return (
     <SearchBarWrapper ref={ref}>

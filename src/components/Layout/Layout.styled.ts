@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import WeatherIcon from "../../assets/cloudy.png";
 
 export default styled.div`
   width: 100%;

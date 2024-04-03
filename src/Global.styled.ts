@@ -60,7 +60,7 @@ export const GlobalStyles = createGlobalStyle`
 
     /* search history */
     --icon-bg: #fff; 
-    --icon-bg--hover: #eee; 
+    --icon-bg--hover: #efd6ff; 
 
     /* border */
     --main-panel-border-stroke: 1px solid #FFFFFF80;
@@ -75,11 +75,14 @@ export const GlobalStyles = createGlobalStyle`
     --global-border-radius-2x: 1.25rem;
 
     @media (min-width: 480px) {
+      /* slightly bigger phone */
+
+    }
 
 
-      /* layout */
-
-
+    @media(max-width: 320px){ 
+      /* galaxy-fold */
+      font-size: .7rem
     }
 
     @media (min-width: 768px) {

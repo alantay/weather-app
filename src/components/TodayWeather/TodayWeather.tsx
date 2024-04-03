@@ -26,7 +26,7 @@ const TodayWeather = () => {
     dt,
   } = data;
 
-  // const weatherPrint = weather.map(({ description }) => description).join(", ");
+  /* get the first weather type. Possible to have multiple weather type. but we only display the first */
   const { description, icon } = weather[0];
 
   return (
